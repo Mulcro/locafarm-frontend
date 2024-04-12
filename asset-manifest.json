@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Mulcro/locafarm-frontend/static/css/main.6e13ce27.css",
+    "main.js": "/Mulcro/locafarm-frontend/static/js/main.f9061d74.js",
+    "static/js/453.8ab44547.chunk.js": "/Mulcro/locafarm-frontend/static/js/453.8ab44547.chunk.js",
+    "static/media/logo.svg": "/Mulcro/locafarm-frontend/static/media/logo.e267e0ebad22e9f825a5c410c08ddf41.svg",
+    "index.html": "/Mulcro/locafarm-frontend/index.html",
+    "main.6e13ce27.css.map": "/Mulcro/locafarm-frontend/static/css/main.6e13ce27.css.map",
+    "main.f9061d74.js.map": "/Mulcro/locafarm-frontend/static/js/main.f9061d74.js.map",
+    "453.8ab44547.chunk.js.map": "/Mulcro/locafarm-frontend/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6e13ce27.css",
+    "static/js/main.f9061d74.js"
+  ]
+}
