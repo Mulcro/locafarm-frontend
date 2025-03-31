@@ -32,6 +32,7 @@ const SellerOrders = () => {
         return `${month}/${day}/${year}`;
     }
 
+    // Not Working
     const fulfillOrder = (orderId) => {
         fetch(`https://locafarm-backend-35edbc31d82d.herokuapp.com/orders/fulfill`, {
             method: 'POST',
