@@ -52,7 +52,7 @@ const Login = () => {
     <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-gradient-to-r from-emerald-500 to-indigo-300">
       <h1 className="text-white text-3xl mb-3">Welcome back</h1>
       <div>
-        <p className="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suspendisse aliquam varius rutrum purus maecenas ac <a href="#" className="text-indigo-500 font-semibold">Learn more</a></p>
+        <p className="text-white">Test this app with <span className='font-bold underline text-green-300'>Username: test and Password: test</span>  or make your own account! <a href="#" className="text-indigo-500 font-semibold">Learn more</a></p>
       </div>
     </div>
     <div className="w-full lg:w-1/2 py-16 px-12">

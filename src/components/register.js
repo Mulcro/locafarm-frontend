@@ -50,7 +50,7 @@ const Register = () => {
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-gradient-to-r from-indigo-500 to-emerald-300">
         <h1 className="text-white text-3xl mb-3">Welcome</h1>
         <div>
-          <p className="text-white">Test this app with username test and password test or make your own account! <a href="#" className="text-emerald-500 font-semibold">Learn more</a></p>
+          <p className="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suspendisse aliquam varius rutrum purus maecenas ac <a href="#" className="text-emerald-500 font-semibold">Learn more</a></p>
         </div>
       </div>
       <div className="w-full lg:w-1/2 py-16 px-12">
