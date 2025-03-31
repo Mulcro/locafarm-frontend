@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import UserContext from "../Context/userContext";
+import { toast } from "react-toastify";
 
 
 const ProductView = () => {
@@ -11,6 +12,8 @@ const ProductView = () => {
     const [loading, setLoading] = useState(false);
 
     const [quantity, setQuantity] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -26,10 +29,6 @@ const ProductView = () => {
         });
     },[]);
 
-    const handlePurchase = () => {
-        alert('You have successfully purchased this product');
-        window.location.replace('/');
-    }
 
     const createOrder = () => {
         console.log(user.id);
@@ -40,16 +39,18 @@ const ProductView = () => {
             },
             body: JSON.stringify({
                 listing_id: id,
-                buyerId: user.id,
-                quantity,
+                buyer_id: user.id,
+                quantity:quantity,
             }),
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            alert('Order created successfully');
+            toast.success("Your order was successfully created!");
+            navigate('/');
         })
         .catch((error) => {
+            toast.error("Something went wrong and your order wasn't created. Please try again!");
             console.error('Error:', error);
         });
     }
@@ -116,24 +117,25 @@ const ProductView = () => {
                             </span>
                             </div>
                             <p class="font-bold leading-relaxed"> {listing.description}</p>
-                            <div class="bg-emerald-500 pt-3 px-3 rounded-xl flex mt-6 items-center text-white pb-5 border-b-2 border-gray-200 mb-5">
-                            <div class=" font-bold flex">
-                                <span class="mr-3">Seller:</span>
-                                {listing.user_id.first_name} {listing.user_id.last_name}
-                            </div>
-                            <div class="font-bold flex ml-6 items-center">
-                                <span class="mr-3">Listed on: </span>
-                                <div class="relative">
-                                    {parseDate(listing.created_at)}
-                                    <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" jstroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
-                                    <path d="M6 9l6 6 6-6"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                            </div>
-                            <p>inventory {listing.inventory}</p>
+
+                            <div class="flex flex-col justify-start bg-emerald-500 pt-3 px-3 rounded-xl mt-6 text-white pb-5 border-b-2 border-gray-200 mb-5">
+                                <div class=" font-bold">
+                                    <span class="mr-3">Seller:</span>
+                                    {listing.user_id.first_name} {listing.user_id.last_name}
+                                </div>
+                                <p className="font-bold">Inventory: {listing.inventory}</p>
+                                <div class="font-bold flex items-center">
+                                    <span>Listed on: {parseDate(listing.created_at)}</span>
+                                    <div class="relative">
+                                        <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" jstroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                                        <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                </div>
                         </div>
+
                     <div class="flex justify-between">
                         <span class="title-font font-medium text-2xl text-gray-900">${listing.price}</span>
 

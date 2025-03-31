@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import {toast} from "react-toastify"
 
 const Register = () => {
 
@@ -9,6 +10,8 @@ const Register = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,9 +34,11 @@ const Register = () => {
             .then(data => {
                 console.log(data.user);
                 sessionStorage.setItem('user', JSON.stringify(data.user));
-                window.location = '/login';
+                toast.success("You have successfully logged in!");
+                navigate('/login');
             })
             .catch((error) => {
+                toast.error("Something went wrong. Please try again");
                 console.error('Error:', error);
             });
     };
@@ -45,7 +50,7 @@ const Register = () => {
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-gradient-to-r from-indigo-500 to-emerald-300">
         <h1 className="text-white text-3xl mb-3">Welcome</h1>
         <div>
-          <p className="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suspendisse aliquam varius rutrum purus maecenas ac <a href="#" className="text-emerald-500 font-semibold">Learn more</a></p>
+          <p className="text-white">Test this app with username test and password test or make your own account! <a href="#" className="text-emerald-500 font-semibold">Learn more</a></p>
         </div>
       </div>
       <div className="w-full lg:w-1/2 py-16 px-12">

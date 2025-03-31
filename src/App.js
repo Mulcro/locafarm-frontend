@@ -10,11 +10,13 @@ import Farmer from './components/farmer';
 import ProductView from './components/productView';
 import UserProvider from './Context/userProvider';
 import UserOrders from './components/userOrders';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <UserProvider>
       <Router>
+        <ToastContainer position='top-center'/>
         <Navbar/>
         <Routes>
           <Route path="/" element={<Main/>}/>

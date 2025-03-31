@@ -1,7 +1,8 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useContext, useRef} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import  UserContext  from '../Context/userContext';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 //Modify link
 const Login = () => {
@@ -11,6 +12,8 @@ const Login = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    
+    const formRef = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,10 +36,13 @@ const Login = () => {
               "level": data.user.level
             });
             sessionStorage.setItem('user', JSON.stringify(data.token));
+            toast.success('Sucessfully logged in!');
             navigate('/');
         })
         .catch((error) => {
             console.error('Error:', error);
+            formRef.current.reset();
+            toast.error('Your login was not successfull please try again with a different username or password');
         });
     }
     return ( 
@@ -51,7 +57,7 @@ const Login = () => {
     </div>
     <div className="w-full lg:w-1/2 py-16 px-12">
       <h2 className="text-3xl mb-4">Login in</h2>
-      <form action="#">
+      <form ref={formRef} action="#">
         <div className="mt-5">
           <input type="text" placeholder="Email" className="border border-gray-400 py-1 px-2 w-full" onChange={e => setEmail(e.target.value)} />
         </div>
@@ -64,7 +70,7 @@ const Login = () => {
           </span>
         </div>
         <div className="mt-5">
-          <button onClick={e => handleSubmit(e)} className="w-full rounded-xl bg-indigo-500 py-3 text-center text-white hover:bg-emerald-600">Login</button>
+          <button disabled={((email != null) && (password != null)) ? false : true} onClick={e => handleSubmit(e)} className="w-full rounded-xl bg-indigo-500 py-3 text-center text-white hover:bg-emerald-600 disabled:bg-gray-400 ">Login</button>
         </div>
       </form>
     </div>
