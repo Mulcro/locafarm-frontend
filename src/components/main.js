@@ -60,7 +60,7 @@ const Main = () => {
                     <button onClick={() => handleSeach()} className='rounded border border-black bg-indigo-400 text-white font-bold p-2'>Search</button>
                 </div>
 
-                <div>
+                <div >
                     <ListingCards canDelete={false} listings={listings}/>
                 <div/>
             <div/>
