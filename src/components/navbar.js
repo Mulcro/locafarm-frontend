@@ -4,6 +4,7 @@ import {Link, useNavigate, useLocation } from "react-router-dom";
 import icon from '../logo.svg'
 import { IoClose } from "react-icons/io5";
 import UserOrders from './userOrders';
+import {toast} from "react-toastify";
 
 const Navbar = () => {
     const [renderFarmerPopup, setRenderFarmerPopup] = useState(false);
@@ -23,12 +24,15 @@ const Navbar = () => {
         .then(response => response.json())  
         .then(data => {
             console.log(data);
-            alert('You are now a farmer! Please login again');
+            toast.success('You are now a farmer! Please login again');
             setRenderFarmerPopup(false);
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            },1000)
         })
         .catch((error) => {
             console.error('Error:', error);
+            toast.error("Something went wrong, please try again.")
         });
     }
 
@@ -55,7 +59,7 @@ const Navbar = () => {
                     <button type="button" className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-black dark:hover:bg-emerald-700 dark:focus:ring-blue-800" onClick={() => setRenderFarmerPopup(true)}>Become a Farmer</button>
 
                     {renderFarmerPopup &&
-                        <div className="fixed fade top-0 left-0 bg-black bg-opacity-60 w-full h-full ">
+                        <div className="z-[100] fixed fade top-0 left-0 bg-black bg-opacity-60 w-full h-full ">
                             <div className='relative w-full h-full'>
                                 <div className='flex justify-center items-center h-[100vh]'>
                                     <div className='bg-white w-[35rem] h-[20rem] border-2 border-solid border-black rounded-2xl p-4'>

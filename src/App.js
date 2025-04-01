@@ -16,7 +16,7 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        <ToastContainer position='top-center'/>
+        <ToastContainer position='top-center' hideProgressBar closeOnClick theme="dark" pauseOnHover={false}/>
         <Navbar/>
         <Routes>
           <Route path="/" element={<Main/>}/>

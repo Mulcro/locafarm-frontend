@@ -34,7 +34,7 @@ const Register = () => {
             .then(data => {
                 console.log(data.user);
                 sessionStorage.setItem('user', JSON.stringify(data.user));
-                toast.success("You have successfully logged in!");
+                toast.success("You have successfully registered in!");
                 navigate('/login');
             })
             .catch((error) => {
