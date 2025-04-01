@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import  UserContext  from '../Context/userContext';
 import { Link } from 'react-router-dom';
+import {toast} from "react-toastify";
 
 const NewListing = () => {
     const formRef = useRef();
@@ -45,7 +46,7 @@ const NewListing = () => {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Listing added successfully')
+                toast.success('Listing added successfully')
                 setName("");
                 setDescription("");
                 setInventory(null);
