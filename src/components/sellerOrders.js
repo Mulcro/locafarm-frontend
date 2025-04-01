@@ -34,27 +34,24 @@ const SellerOrders = () => {
 
     // Not Working
     const fulfillOrder = (orderId) => {
-        fetch(`https://locafarm-backend-35edbc31d82d.herokuapp.com/orders/fulfill`, {
+        fetch(`https://locafarm-backend-35edbc31d82d.herokuapp.com/orders/${orderId}/fulfill`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                orderId,
-            }),
+            }
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            alert('Order fulfilled successfully');
+            toast.success('Order fulfilled successfully');
             fetchOrders();
         })
         .catch((error) => {
             console.error('Error:', error);
+            toast.error("Something went wrong. The order was not fulfilled, please try again");
         });
     }
 
-    //Not working
     const handleDeleteOrder = (orderId,listingId) => {
                 fetch(`https://locafarm-backend-35edbc31d82d.herokuapp.com/orders/${orderId}/delete`,{
                     method: "DELETE",
@@ -99,10 +96,20 @@ const SellerOrders = () => {
                                     <span className='font-bold text-white'> Order placed by: {order.buyer_first_name} {order.buyer_last_name}<p class="mb-3 font-normal text-white dark:text-white">{order.total_price}</p></span>
                                     <span className='font-bold text-white'> Placed on: <p class="mb-3 font-normal text-white dark:text-white">{parseDate(order.created_at)}</p></span>
                                     <span className='font-bold text-white'> Status: <p class="mb-3 font-normal text-white dark:text-white">{order.fulfilled ? "Fulfilled" : "Pending Fulfillment"}</p></span>
-                                    <div className="flex flex-row w-content justify-around items-center gap-1">
-                                    <button disabled={!order.fulfilled ? "" : "hidden"} className='bg-indigo-500 text-white font-bold p-2 rounded-lg hover:bg-green-600' onClick={() => fulfillOrder(order.id)}>Fulfill</button>
-                                    <button className='bg-indigo-500 text-white font-bold p-2 rounded-lg hover:bg-red-500' onClick={() => handleDeleteOrder(order.id, order.listing_id)}>Delete Order</button>
-                                    </div>
+                                    
+                                    { !order.fulfilled &&
+                                        <div className="flex flex-row w-content justify-around items-center gap-1">
+                                                                                
+                                            <button disabled={!order.fulfilled ? "" : "hidden"} className='bg-indigo-500 text-white font-bold p-2 rounded-lg hover:bg-green-600' onClick={() => fulfillOrder(order.id)}>Fulfill</button>
+
+                                            <button className='bg-indigo-500 text-white font-bold p-2 rounded-lg hover:bg-red-500 disabled:bg-gray-400 disabled:text-gray-200' onClick={() => handleDeleteOrder(order.id, order.listing_id)}>Delete Order</button>
+                                        </div>
+                                    }
+                                    {order.fulfilled &&
+                                        <div className="flex flex-col justify-center items-center text-center bg-green-500/50 border-1 border-solid border-black p-1 rounded-xl">
+                                            <p className="text-sm text-white">Order has been fulfilled and cannot be deleted</p>
+                                        </div>
+                                    }
                                 </div>
                                 </div>
                             ))
